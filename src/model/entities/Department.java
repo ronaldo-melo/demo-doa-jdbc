@@ -60,8 +60,8 @@ public class Department implements Serializable{
 	}
 
 	@Override
-	public String toString() {
-		return "Department [id=" + id + ", name=" + name + "]";
+	public String toString() {				
+		return String.format("%nid: %d%nname: %s%n", id, name);
 	}
 
 }
