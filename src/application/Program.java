@@ -1,8 +1,10 @@
 package application;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Scanner;
 
 import model.dao.DaoFactory;
 import model.dao.SellerDao;
@@ -12,7 +14,8 @@ import model.entities.Seller;
 public class Program {
 	
 	public static void main(String[] args) throws ParseException{
-			
+		
+		try (Scanner sc = new Scanner(System.in)){
 		SellerDao sellerDao = DaoFactory.createSellerDao(); 
 		
 		System.out.println("=== TEST 1: seller findById =====");
@@ -34,6 +37,25 @@ public class Program {
 		sellerDao.insert(newSeller);
 		
 		System.out.println("Inserted! New id = " + newSeller.getId());
+		
+		System.out.println("\n=== TEST 5: seller insert =====\n");
+		 
+		seller = sellerDao.findById(1);
+		
+		seller.setName("Marta Waine");
+		seller.setEmail("martawaine@gmail.com");
+		sellerDao.update(seller);
+		System.out.println("Update completed!"); 
+		
+		System.out.println("\n=== TEST 6: seller delete =====\n");
+		System.out.print("Enter id for delete test: ");
+		int id = sc.nextInt();
+		sellerDao.delete(id);
+		System.out.println("Delete completed");
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
