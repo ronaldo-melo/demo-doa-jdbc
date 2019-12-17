@@ -108,10 +108,10 @@ public class Seller implements Serializable {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
 		sb.append("id: " + id);
-		sb.append("\nname: " + name);
-		sb.append("\nemail: " + email);
-		sb.append("\nbirthdate: " + sdf.format(birthDate));
-		sb.append("\nbase salary: " + baseSalary);
+		sb.append(", name: " + name);
+		sb.append(", email: " + email);
+		sb.append(", birthdate: " + sdf.format(birthDate));
+		sb.append(", base salary: " + baseSalary);
 		sb.append("\ndepartment info: " + department);
 		
 		return sb.toString();

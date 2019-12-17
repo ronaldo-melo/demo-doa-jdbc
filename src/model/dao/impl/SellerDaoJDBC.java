@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -103,8 +104,49 @@ public class SellerDaoJDBC implements SellerDao{
 
 	@Override
 	public List<Seller> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+				
+		try {
+			
+			Statement ps = conn.createStatement();
+			
+			ResultSet rs = ps.executeQuery(
+					  "SELECT seller.*,department.Name as DepName "
+					+ "FROM seller INNER JOIN department "
+					+ "ON seller.DepartmentId = department.Id "
+					+ "ORDER BY Name "
+					);
+			
+			List<Seller> list = new ArrayList<>();
+			/* o map irá garantir que apenas um objeto departament seja instânciado para garantir
+			 * a relação um para muitos. No caso o while enquanto for válido irá atribuir
+			 * sempre o mesmo objeto department presente na chave de valor que será igual ao id de department.
+			 * Oo primeiro laço map irá retornar um valor nulo porque nenhum um valor foi inserido. Em seguida
+			 * o obj Department torna condição de nulo valida. Então um objeto Department é instânciado através
+			 * do retorno do método instantieteDepartment(rs) que recebe o resultset atual e a partir dele 
+			 * retorna um um objeto department e em seguida o guarda na estrutura map, como chave
+			 * recebe o id do departmento e como valor o objeto department. Em seguida um objeto seller é retornado
+			 * a partir do método instantieteSeller(rs, dep) que recebe um resultSet e o objeto departamento (que será
+			 * sempre um mesmo objeto Department). Por fim o objeto Seller é adicionado a lista ao fim do loop a lista
+			 * é retornada. 
+			 * */
+			Map<Integer, Department> map = new HashMap<>();
+			
+			while(rs.next()) {
+				Department dep = map.get(rs.getInt("DepartmentId"));
+				
+				if(dep == null) {
+					dep = instantieteDepartment(rs);
+					map.put(rs.getInt("DepartmentId"), dep);
+				}
+				
+				Seller obj = instantieteSeller(rs, dep);
+				list.add(obj);				
+			}
+			return list;
+			
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
 	}
 
 	@Override
