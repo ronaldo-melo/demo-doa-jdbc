@@ -1,6 +1,5 @@
 package application;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -48,10 +47,10 @@ public class Program {
 		System.out.println("Update completed!"); 
 		
 		System.out.println("\n=== TEST 6: seller delete =====\n");
-		System.out.print("Enter id for delete test: ");
-		int id = sc.nextInt();
-		sellerDao.delete(id);
-		System.out.println("Delete completed");
+//		System.out.print("Enter id for delete test: ");
+//		int id = sc.nextInt();
+//		sellerDao.delete(id);
+//		System.out.println("Delete completed");
 		
 		} catch (Exception e) {
 			e.printStackTrace();
