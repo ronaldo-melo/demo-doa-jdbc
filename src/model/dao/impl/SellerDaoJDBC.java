@@ -109,7 +109,7 @@ public class SellerDaoJDBC implements SellerDao{
 			if(rowsAffected == 0) {
 				throw new DbException("there is no seller with this id in the sellers records!");
 			}
-			
+			DB.closeStatement(ps);
 		} catch (SQLException e) {
 			throw new DbException(e.getMessage());
 		}

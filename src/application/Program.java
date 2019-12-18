@@ -70,9 +70,18 @@ public class Program {
 		List<Department> list = departmentDao.findAll();
 		list.stream().forEach(System.out::println);
 		
+		System.out.println("\n=== TEST 9: department delete =====\n");
+		
+		System.out.print("Enter id for delete test: ");
+		int id = sc.nextInt();
+		departmentDao.delete(id);
+		System.out.println("Delete complete!");
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+
 		
 	}
 	
