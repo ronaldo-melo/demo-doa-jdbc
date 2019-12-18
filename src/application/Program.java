@@ -1,12 +1,11 @@
 package application;
 
 import java.text.ParseException;
+import java.util.List;
 import java.util.Scanner;
 
 import model.dao.DaoFactory;
 import model.dao.DepartmentDao;
-import model.dao.SellerDao;
-import model.dao.impl.DepartmentDaoJDBC;
 import model.entities.Department;
 
 public class Program {
@@ -62,9 +61,14 @@ public class Program {
 		System.out.println("\n=== TEST 7: department findById =====\n");
 		
 		System.out.print("Enter id for delete test: ");
-		int id = sc.nextInt();
+//		int id = sc.nextInt();
 		
-		System.out.println(departmentDao.findById(id));
+//		System.out.println(departmentDao.findById(id));
+		
+		System.out.println("\n=== TEST 8: department findAll =====\n");
+		
+		List<Department> list = departmentDao.findAll();
+		list.stream().forEach(System.out::println);
 		
 		} catch (Exception e) {
 			e.printStackTrace();
