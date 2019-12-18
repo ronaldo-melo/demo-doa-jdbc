@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 import model.dao.DaoFactory;
 import model.dao.DepartmentDao;
+import model.dao.SellerDao;
+import model.dao.impl.DepartmentDaoJDBC;
 import model.entities.Department;
 
 public class Program {
@@ -20,12 +22,10 @@ public class Program {
 	
 		System.out.println("\n=== TEST 2: seller findByDepartment =====\n");
 		Department department = new Department(1, null);
-		
-		System.out.println("\n=== TEST 3: seller insert =====\n");
 		List<Seller> list = sellerDao.findByDepartment(department);
 		list.stream().forEach(System.out::println);
 		
-		System.out.println("\n=== TEST 4: seller insert =====\n");
+		System.out.println("\n=== TEST 3: seller insert =====\n");
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
@@ -34,7 +34,7 @@ public class Program {
 		
 		System.out.println("Inserted! New id = " + newSeller.getId());
 		
-		System.out.println("\n=== TEST 5: seller insert =====\n");
+		System.out.println("\n=== TEST 4: seller update =====\n");
 		 
 		seller = sellerDao.findById(1);
 		
@@ -43,7 +43,7 @@ public class Program {
 		sellerDao.update(seller);
 		System.out.println("Update completed!"); 
 		
-		System.out.println("\n=== TEST 6: seller delete =====\n");
+		System.out.println("\n=== TEST 5: seller delete =====\n");
 //		System.out.print("Enter id for delete test: ");
 //		int id = sc.nextInt();
 //		sellerDao.delete(id);
@@ -58,6 +58,13 @@ public class Program {
 		departmentDao.insert(newDepartment);
 			
 		System.out.println("Inserted! New id = " + newDepartment.getId());
+		
+		System.out.println("\n=== TEST 7: department findById =====\n");
+		
+		System.out.print("Enter id for delete test: ");
+		int id = sc.nextInt();
+		
+		System.out.println(departmentDao.findById(id));
 		
 		} catch (Exception e) {
 			e.printStackTrace();

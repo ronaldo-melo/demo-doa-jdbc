@@ -61,7 +61,7 @@ public class Department implements Serializable{
 
 	@Override
 	public String toString() {				
-		return String.format(" id: %d, name: %s%n", id, name);
+		return String.format("id: %d, name: %s%n", id, name);
 	}
 
 }
