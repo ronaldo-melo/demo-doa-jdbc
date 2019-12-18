@@ -77,6 +77,12 @@ public class Program {
 		departmentDao.delete(id);
 		System.out.println("Delete complete!");
 		
+		System.out.println("\n=== TEST 10: department update =====\n");
+		newDepartment = departmentDao.findById(20);		
+		newDepartment.setName("Deleted");
+		departmentDao.update(newDepartment);
+		System.out.println("Update completed!");
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
