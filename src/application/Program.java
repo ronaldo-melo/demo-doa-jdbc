@@ -1,21 +1,18 @@
 package application;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.Scanner;
 
 import model.dao.DaoFactory;
-import model.dao.SellerDao;
+import model.dao.DepartmentDao;
 import model.entities.Department;
-import model.entities.Seller;
 
 public class Program {
 	
 	public static void main(String[] args) throws ParseException{
 		
 		try (Scanner sc = new Scanner(System.in)){
-		SellerDao sellerDao = DaoFactory.createSellerDao(); 
+		/*SellerDao sellerDao = DaoFactory.createSellerDao(); 
 		
 		System.out.println("=== TEST 1: seller findById =====");
 		Seller seller = sellerDao.findById(3);
@@ -50,7 +47,17 @@ public class Program {
 //		System.out.print("Enter id for delete test: ");
 //		int id = sc.nextInt();
 //		sellerDao.delete(id);
-//		System.out.println("Delete completed");
+//		System.out.println("Delete completed");*/
+			
+		System.out.println("\n=== TEST 6: department insert =====\n");	
+			
+		DepartmentDao departmentDao = DaoFactory.createDepartmentDo();
+			
+		Department newDepartment = new Department(null, "Eletronics");
+			
+		departmentDao.insert(newDepartment);
+			
+		System.out.println("Inserted! New id = " + newDepartment.getId());
 		
 		} catch (Exception e) {
 			e.printStackTrace();
