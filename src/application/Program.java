@@ -1,94 +1,134 @@
 package application;
 
 import java.text.ParseException;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
 
 import model.dao.DaoFactory;
-import model.dao.DepartmentDao;
+import model.dao.SellerDao;
 import model.entities.Department;
+import model.entities.Seller;
 
 public class Program {
-	
-	public static void main(String[] args) throws ParseException{
-		
-		try (Scanner sc = new Scanner(System.in)){
-		/*SellerDao sellerDao = DaoFactory.createSellerDao(); 
-		
-		System.out.println("=== TEST 1: seller findById =====");
-		Seller seller = sellerDao.findById(3);
-		System.out.println(seller);
-	
-		System.out.println("\n=== TEST 2: seller findByDepartment =====\n");
-		Department department = new Department(1, null);
-		List<Seller> list = sellerDao.findByDepartment(department);
-		list.stream().forEach(System.out::println);
-		
-		System.out.println("\n=== TEST 3: seller insert =====\n");
-		
+
+	public static void showGetInfoFromMenu() {
+		System.out.println("-----GET INFO FROM-----");
+		System.out.println("1. Sellers");
+		System.out.println("2. Department");
+		System.out.println("3. Exit");
+	}
+
+	public static void showDepartmentCrudOption() {
+		System.out.println("-----Choise one-----");
+		System.out.println("1. Create Department");
+		System.out.println("2. Find Department");
+		System.out.println("3. Update Department");
+		System.out.println("4. List all Department's");
+		System.out.println("5. Exit");
+	}
+
+	public static void showSellerCrudOption() {
+		System.out.println("-----Choise one-----");
+		System.out.println("1. Create Seller");
+		System.out.println("2. Find Seller");
+		System.out.println("3. Update Seller");
+		System.out.println("4. Delete Seller");
+		System.out.println("5. List all Seller's");
+		System.out.println("6. Exit");
+	}
+
+	public static void main(String[] args) throws ParseException {
+
+		Locale.setDefault(Locale.US);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		
-		Seller newSeller = new Seller(null, "Greg", "greg@gmail.com", sdf.parse("22/06/1994"), 4000.0, department);
-		sellerDao.insert(newSeller);
-		
-		System.out.println("Inserted! New id = " + newSeller.getId());
-		
-		System.out.println("\n=== TEST 4: seller update =====\n");
-		 
-		seller = sellerDao.findById(1);
-		
-		seller.setName("Marta Waine");
-		seller.setEmail("martawaine@gmail.com");
-		sellerDao.update(seller);
-		System.out.println("Update completed!"); 
-		
-		System.out.println("\n=== TEST 5: seller delete =====\n");
-//		System.out.print("Enter id for delete test: ");
-//		int id = sc.nextInt();
-//		sellerDao.delete(id);
-//		System.out.println("Delete completed");*/
-			
-		System.out.println("\n=== TEST 6: department insert =====\n");	
-			
-		DepartmentDao departmentDao = DaoFactory.createDepartmentDo();
-			
-		Department newDepartment = new Department(null, "Eletronics");
-			
-		departmentDao.insert(newDepartment);
-			
-		System.out.println("Inserted! New id = " + newDepartment.getId());
-		
-		System.out.println("\n=== TEST 7: department findById =====\n");
-		
-		System.out.print("Enter id for delete test: ");
-//		int id = sc.nextInt();
-		
-//		System.out.println(departmentDao.findById(id));
-		
-		System.out.println("\n=== TEST 8: department findAll =====\n");
-		
-		List<Department> list = departmentDao.findAll();
-		list.stream().forEach(System.out::println);
-		
-		System.out.println("\n=== TEST 9: department delete =====\n");
-		
-		System.out.print("Enter id for delete test: ");
-		int id = sc.nextInt();
-		departmentDao.delete(id);
-		System.out.println("Delete complete!");
-		
-		System.out.println("\n=== TEST 10: department update =====\n");
-		newDepartment = departmentDao.findById(20);		
-		newDepartment.setName("Deleted");
-		departmentDao.update(newDepartment);
-		System.out.println("Update completed!");
-		
+		SellerDao sellerDao = DaoFactory.createSellerDao();
+
+		try (Scanner sc = new Scanner(System.in)) {
+
+			int choiceMenu;
+			do {
+
+				// Escolher entre SellersCrud e DepartmentCrud
+				showGetInfoFromMenu();
+				choiceMenu = sc.nextInt();
+
+				switch (choiceMenu) {
+
+				case 1:
+					int sellerMenu;
+					// Escolher entre as opções de Seller Crud
+					do {
+						showSellerCrudOption();
+						sellerMenu = sc.nextInt();
+						sc.nextLine();
+
+						switch (sellerMenu) {
+
+						// Create Seller
+						case 1:
+							registerSeller(sdf, sellerDao, sc);
+							break;
+
+						case 2:
+							// Find Seller
+
+							break;
+
+						// Update Seller
+						case 3:
+
+							break;
+
+						// Delete Seller
+						case 4:
+
+							break;
+
+						// List all Seller's
+						case 5:
+
+							break;
+
+						// Exit
+						default:
+							System.out.println("\nLiving Seller C.R.U.D\n");
+						}
+
+					} while (sellerMenu >= 1 && sellerMenu <= 4);
+
+				case 2:
+					// CRUD logic of the departments
+
+				}
+
+			} while (choiceMenu == 1 || choiceMenu == 2);
+			System.out.println("\nLiving C.R.U.D system...\nThank you for use our services! ;-)");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 
-		
 	}
-	
+
+	private static void registerSeller(SimpleDateFormat sdf, SellerDao sellerDao, Scanner sc) throws ParseException {
+
+		System.out.print("Enter Seller name: ");
+		String name = sc.nextLine();
+		System.out.print("Enter Seller email: ");
+		String email = sc.nextLine();
+		System.out.print("Enter Seller BirthDate: ");
+		Date birthDate = sdf.parse(sc.nextLine());
+		System.out.print("Enter Seller base salary: ");
+		double baseSalary = sc.nextDouble();
+		System.out.print("Enter Seller DepartmentId : ");
+		int id = sc.nextInt();
+
+		Seller seller = new Seller(id, name, email, birthDate, baseSalary, new Department(id, null));
+		sellerDao.insert(seller);
+
+		System.out.println("\nDone! Seller registered!\n");
+	}
+
 }

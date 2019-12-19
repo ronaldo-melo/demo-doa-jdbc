@@ -115,7 +115,7 @@ public class SellerDaoJDBC implements SellerDao{
 		}
 		
 	}
-
+	              
 	@Override
 	public Seller findById(Integer id) {
 		
@@ -222,8 +222,7 @@ public class SellerDaoJDBC implements SellerDao{
 			throw new DbException(e.getMessage());
 		}
 	}
-
-	@Override
+					    
 	public List<Seller> findByDepartment(Department department) {
 		
 		PreparedStatement st = null;
@@ -267,5 +266,7 @@ public class SellerDaoJDBC implements SellerDao{
 			DB.closeStatement(st);
 			DB.closeResultSet(rs);
 		}		
-	}	
+	}
+
+
 }
