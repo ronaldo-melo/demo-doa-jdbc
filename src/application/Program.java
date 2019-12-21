@@ -8,6 +8,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import model.dao.DaoFactory;
+import model.dao.DepartmentDao;
 import model.dao.SellerDao;
 import model.entities.Department;
 import model.entities.Seller;
@@ -45,6 +46,7 @@ public class Program {
 		Locale.setDefault(Locale.US);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		SellerDao sellerDao = DaoFactory.createSellerDao();
+		DepartmentDao departmentDao = DaoFactory.createDepartmentDo();
 		Seller seller;
 		
 		
@@ -79,8 +81,7 @@ public class Program {
 							System.out.print("Enter seller id: ");
 							int id = sc.nextInt();							
 							seller = sellerDao.findById(id);							
-							System.out.println(sellerDao.findById(id));
-							
+							System.out.println(sellerDao.findById(id));							
 							break;
 
 						// Update Seller
@@ -115,7 +116,23 @@ public class Program {
 					} while (sellerMenu >= 1 && sellerMenu <= 4);
 
 				case 2:
-					// CRUD logic of the departments
+					int departmentMenu;
+					do {
+						showDepartmentCrudOption();
+						departmentMenu = sc.nextInt();
+						sc.nextLine();
+						switch(departmentMenu) {
+						
+						case 1:
+							System.out.print("Enter department name: ");
+							String name = sc.nextLine();
+							departmentDao.insert(new Department(null, name));
+							System.out.println("\nDone! Department registred!\n");
+							break;
+						}
+						
+					} while (departmentMenu == 1 || departmentMenu == 2);
+
 
 				}
 
