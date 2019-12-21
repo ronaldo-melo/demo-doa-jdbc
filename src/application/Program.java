@@ -3,6 +3,7 @@ package application;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -101,7 +102,9 @@ public class Program {
 
 						// List all Seller's
 						case 5:
-
+							System.out.println("\n-----------------ALL SELLERS-------------------");
+							List<Seller> list = sellerDao.findAll();
+							list.stream().forEach(System.out::println);
 							break;
 
 						// Exit
