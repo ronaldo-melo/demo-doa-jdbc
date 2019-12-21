@@ -47,7 +47,6 @@ public class Program {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		SellerDao sellerDao = DaoFactory.createSellerDao();
 		DepartmentDao departmentDao = DaoFactory.createDepartmentDo();
-		Seller seller;
 
 		try (Scanner sc = new Scanner(System.in)) {
 
@@ -70,41 +69,29 @@ public class Program {
 
 						switch (sellerMenu) {
 
-						// Create Seller
+							// Create Seller
 						case 1:
 							registerSeller(sdf, sellerDao, sc);
 							break;
 
 						case 2:
 							// Find Seller
-							System.out.print("Enter seller id: ");
-							int id = sc.nextInt();
-							seller = sellerDao.findById(id);
-							System.out.println(sellerDao.findById(id));
+							findSeller(sellerDao, sc);
 							break;
 
-						// Update Seller
+							// Update Seller
 						case 3:
-							System.out.print("Enter seller id: ");
-							id = sc.nextInt();
-							sc.nextLine();
-							seller = sellerDao.findById(id);
-							updateSeller(sdf, sellerDao, sc, seller);
+							updateSeller(sdf, sellerDao, sc);
 							break;
 
-						// Delete Seller
+							// Delete Seller
 						case 4:
-							System.out.print("Enter seller id to delete: ");
-							id = sc.nextInt();
-							sellerDao.delete(id);
-							System.out.println("Done! Seller deleted!\n");
+							deleteSeller(sellerDao, sc);
 							break;
 
-						// List all Seller's
+							// List all Seller's
 						case 5:
-							System.out.println("\n-----------------ALL SELLERS-------------------");
-							List<Seller> list = sellerDao.findAll();
-							list.stream().forEach(System.out::println);
+							listAllSellers(sellerDao);
 							break;
 
 						// Exit
@@ -112,7 +99,7 @@ public class Program {
 							System.out.println("\nLiving Seller C.R.U.D\n");
 						}
 
-					} while (sellerMenu >= 1 && sellerMenu <= 4);
+					} while (sellerMenu >= 1 && sellerMenu <= 5);
 					break;
 
 				case 2:
@@ -124,34 +111,20 @@ public class Program {
 						switch (departmentMenu) {
 
 						case 1:
-							System.out.print("Enter department name: ");
-							String name = sc.nextLine();
-							departmentDao.insert(new Department(null, name));
-							System.out.println("\nDone! Department registred!\n");
+							createDepartment(departmentDao, sc);
 							break;
 
 						case 2:
-							System.out.print("Enter deparment id: ");
-							int id = sc.nextInt();
-							Department department = departmentDao.findById(id);
-							System.out.println("\n" + department.toString());
+							findDepartmentById(departmentDao, sc);
 							break;
 
 						case 3:
-							System.out.print("Enter deparment id to update: ");
-							id = sc.nextInt();
-							sc.nextLine();
-							department = departmentDao.findById(id);
-							System.out.print("Enter new department name: ");
-							department.setName(sc.nextLine());
-							departmentDao.update(department);
-							System.out.println("\nDone! Department updated.\n");
+							uddateDepartment(departmentDao, sc);
 							break;
 
 						case 4:
 							System.out.println("\n-----------------ALL DEPARTMENTS-------------------");
-							List<Department> list = departmentDao.findAll();
-							list.forEach(System.out::println);
+							listAllDepartments(departmentDao);
 							break;
 
 						default:
@@ -170,6 +143,66 @@ public class Program {
 			e.printStackTrace();
 		}
 
+	}
+
+	private static void listAllDepartments(DepartmentDao departmentDao) {
+		List<Department> list = departmentDao.findAll();
+		list.forEach(System.out::println);
+	}
+
+	private static void uddateDepartment(DepartmentDao departmentDao, Scanner sc) {
+		System.out.print("Enter deparment id to update: ");
+		int id = sc.nextInt();
+		sc.nextLine();
+		Department department = departmentDao.findById(id);
+		System.out.print("Enter new department name: ");
+		department.setName(sc.nextLine());
+		departmentDao.update(department);
+		System.out.println("\nDone! Department updated.\n");
+	}
+
+	private static void findDepartmentById(DepartmentDao departmentDao, Scanner sc) {
+		System.out.print("Enter deparment id: ");
+		int id = sc.nextInt();
+		Department department = departmentDao.findById(id);
+		System.out.println("\n" + department.toString());
+	}
+
+	private static void createDepartment(DepartmentDao departmentDao, Scanner sc) {
+		System.out.print("Enter department name: ");
+		String name = sc.nextLine();
+		departmentDao.insert(new Department(null, name));
+		System.out.println("\nDone! Department registred!\n");
+	}
+
+	private static void listAllSellers(SellerDao sellerDao) {
+		System.out.println("\n-----------------ALL SELLERS-------------------");
+		List<Seller> list = sellerDao.findAll();
+		list.stream().forEach(System.out::println);
+	}
+
+	private static void deleteSeller(SellerDao sellerDao, Scanner sc) {
+		System.out.print("Enter seller id to delete: ");
+		int id = sc.nextInt();
+		sellerDao.delete(id);
+		System.out.println("Done! Seller deleted!\n");
+	}
+
+	private static void updateSeller(SimpleDateFormat sdf, SellerDao sellerDao, Scanner sc) throws ParseException {
+		Seller seller;
+		System.out.print("Enter seller id: ");
+		int id = sc.nextInt();
+		sc.nextLine();
+		seller = sellerDao.findById(id);
+		changeSeller(sdf, sellerDao, sc, seller);
+	}
+
+	private static void findSeller(SellerDao sellerDao, Scanner sc) {
+		Seller seller;
+		System.out.print("Enter seller id: ");
+		int id = sc.nextInt();
+		seller = sellerDao.findById(id);
+		System.out.println(seller.toString());
 	}
 
 	private static void registerSeller(SimpleDateFormat sdf, SellerDao sellerDao, Scanner sc) throws ParseException {
@@ -191,7 +224,7 @@ public class Program {
 		System.out.println("\nDone! Seller registered!\n");
 	}
 
-	private static void updateSeller(SimpleDateFormat sdf, SellerDao sellerDao, Scanner sc, Seller seller)
+	private static void changeSeller(SimpleDateFormat sdf, SellerDao sellerDao, Scanner sc, Seller seller)
 			throws ParseException {
 
 		System.out.print("Enter new Seller name: ");
