@@ -44,7 +44,9 @@ public class Program {
 		Locale.setDefault(Locale.US);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		SellerDao sellerDao = DaoFactory.createSellerDao();
-
+		Seller seller;
+		
+		
 		try (Scanner sc = new Scanner(System.in)) {
 
 			int choiceMenu;
@@ -73,7 +75,11 @@ public class Program {
 
 						case 2:
 							// Find Seller
-
+							System.out.print("Enter id seller: ");
+							int id = sc.nextInt();							
+							seller = sellerDao.findById(id);							
+							System.out.println(seller);
+							
 							break;
 
 						// Update Seller
