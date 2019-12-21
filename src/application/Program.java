@@ -75,21 +75,28 @@ public class Program {
 
 						case 2:
 							// Find Seller
-							System.out.print("Enter id seller: ");
+							System.out.print("Enter seller id: ");
 							int id = sc.nextInt();							
 							seller = sellerDao.findById(id);							
-							System.out.println(seller);
+							System.out.println(sellerDao.findById(id));
 							
 							break;
 
 						// Update Seller
 						case 3:
-
+							System.out.print("Enter seller id: ");
+							id = sc.nextInt();
+							sc.nextLine();
+							seller = sellerDao.findById(id);
+							updateSeller(sdf, sellerDao, sc, seller);
 							break;
 
 						// Delete Seller
 						case 4:
-
+							System.out.print("Enter seller id to delete: ");
+							id = sc.nextInt();
+							sellerDao.delete(id);
+							System.out.println("Done! Seller deleted!\n");
 							break;
 
 						// List all Seller's
@@ -117,7 +124,7 @@ public class Program {
 		}
 
 	}
-
+	
 	private static void registerSeller(SimpleDateFormat sdf, SellerDao sellerDao, Scanner sc) throws ParseException {
 
 		System.out.print("Enter Seller name: ");
@@ -136,5 +143,26 @@ public class Program {
 
 		System.out.println("\nDone! Seller registered!\n");
 	}
+	
+	private static void updateSeller(SimpleDateFormat sdf, SellerDao sellerDao, Scanner sc, Seller seller) throws ParseException {
 
+		System.out.print("Enter new Seller name: ");
+		seller.setName(sc.nextLine());
+		
+		System.out.print("Enter new Seller email: ");
+		seller.setEmail(sc.nextLine());
+		
+		System.out.print("Enter new Seller BirthDate: ");
+		seller.setBirthDate(sdf.parse(sc.nextLine()));
+		
+		System.out.print("Enter new Seller base salary: ");
+		seller.setBaseSalary(sc.nextDouble());
+		
+		System.out.print("Enter new Seller DepartmentId: ");
+		seller.getDepartment().setId(sc.nextInt());
+
+		sellerDao.update(seller);
+
+		System.out.println("\nDone! Seller updated!\n");
+	}
 }
