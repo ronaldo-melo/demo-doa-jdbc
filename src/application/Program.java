@@ -113,6 +113,7 @@ public class Program {
 						}
 
 					} while (sellerMenu >= 1 && sellerMenu <= 4);
+					break;
 
 				case 2:
 					int departmentMenu;
@@ -146,10 +147,20 @@ public class Program {
 							departmentDao.update(department);
 							System.out.println("\nDone! Department updated.\n");
 							break;
+
+						case 4:
+							System.out.println("\n-----------------ALL DEPARTMENTS-------------------");
+							List<Department> list = departmentDao.findAll();
+							list.forEach(System.out::println);
+							break;
+
+						default:
+							System.out.println("\nLiving Department C.R.U.D\n");
+
 						}
 
-					} while (departmentMenu == 1 || departmentMenu == 2);
-
+					} while (departmentMenu >= 1 && departmentMenu <= 4);
+					break;
 				}
 
 			} while (choiceMenu == 1 || choiceMenu == 2);
