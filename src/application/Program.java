@@ -48,8 +48,7 @@ public class Program {
 		SellerDao sellerDao = DaoFactory.createSellerDao();
 		DepartmentDao departmentDao = DaoFactory.createDepartmentDo();
 		Seller seller;
-		
-		
+
 		try (Scanner sc = new Scanner(System.in)) {
 
 			int choiceMenu;
@@ -79,9 +78,9 @@ public class Program {
 						case 2:
 							// Find Seller
 							System.out.print("Enter seller id: ");
-							int id = sc.nextInt();							
-							seller = sellerDao.findById(id);							
-							System.out.println(sellerDao.findById(id));							
+							int id = sc.nextInt();
+							seller = sellerDao.findById(id);
+							System.out.println(sellerDao.findById(id));
 							break;
 
 						// Update Seller
@@ -121,18 +120,35 @@ public class Program {
 						showDepartmentCrudOption();
 						departmentMenu = sc.nextInt();
 						sc.nextLine();
-						switch(departmentMenu) {
-						
+						switch (departmentMenu) {
+
 						case 1:
 							System.out.print("Enter department name: ");
 							String name = sc.nextLine();
 							departmentDao.insert(new Department(null, name));
 							System.out.println("\nDone! Department registred!\n");
 							break;
-						}
-						
-					} while (departmentMenu == 1 || departmentMenu == 2);
 
+						case 2:
+							System.out.print("Enter deparment id: ");
+							int id = sc.nextInt();
+							Department department = departmentDao.findById(id);
+							System.out.println("\n" + department.toString());
+							break;
+
+						case 3:
+							System.out.print("Enter deparment id to update: ");
+							id = sc.nextInt();
+							sc.nextLine();
+							department = departmentDao.findById(id);
+							System.out.print("Enter new department name: ");
+							department.setName(sc.nextLine());
+							departmentDao.update(department);
+							System.out.println("\nDone! Department updated.\n");
+							break;
+						}
+
+					} while (departmentMenu == 1 || departmentMenu == 2);
 
 				}
 
@@ -144,7 +160,7 @@ public class Program {
 		}
 
 	}
-	
+
 	private static void registerSeller(SimpleDateFormat sdf, SellerDao sellerDao, Scanner sc) throws ParseException {
 
 		System.out.print("Enter Seller name: ");
@@ -163,21 +179,22 @@ public class Program {
 
 		System.out.println("\nDone! Seller registered!\n");
 	}
-	
-	private static void updateSeller(SimpleDateFormat sdf, SellerDao sellerDao, Scanner sc, Seller seller) throws ParseException {
+
+	private static void updateSeller(SimpleDateFormat sdf, SellerDao sellerDao, Scanner sc, Seller seller)
+			throws ParseException {
 
 		System.out.print("Enter new Seller name: ");
 		seller.setName(sc.nextLine());
-		
+
 		System.out.print("Enter new Seller email: ");
 		seller.setEmail(sc.nextLine());
-		
+
 		System.out.print("Enter new Seller BirthDate: ");
 		seller.setBirthDate(sdf.parse(sc.nextLine()));
-		
+
 		System.out.print("Enter new Seller base salary: ");
 		seller.setBaseSalary(sc.nextDouble());
-		
+
 		System.out.print("Enter new Seller DepartmentId: ");
 		seller.getDepartment().setId(sc.nextInt());
 
