@@ -15,31 +15,7 @@ import model.entities.Seller;
 
 public class Program {
 
-	public static void showGetInfoFromMenu() {
-		System.out.println("-----GET INFO FROM-----");
-		System.out.println("1. Sellers");
-		System.out.println("2. Department");
-		System.out.println("3. Exit");
-	}
 
-	public static void showDepartmentCrudOption() {
-		System.out.println("-----Choise one-----");
-		System.out.println("1. Create Department");
-		System.out.println("2. Find Department");
-		System.out.println("3. Update Department");
-		System.out.println("4. List all Department's");
-		System.out.println("5. Exit");
-	}
-
-	public static void showSellerCrudOption() {
-		System.out.println("-----Choise one-----");
-		System.out.println("1. Create Seller");
-		System.out.println("2. Find Seller");
-		System.out.println("3. Update Seller");
-		System.out.println("4. Delete Seller");
-		System.out.println("5. List all Seller's");
-		System.out.println("6. Exit");
-	}
 
 	public static void main(String[] args) throws ParseException {
 
@@ -54,7 +30,7 @@ public class Program {
 			do {
 
 				// Escolher entre SellersCrud e DepartmentCrud
-				showGetInfoFromMenu();
+				ShowMessage.showGetInfoFromMenu();
 				choiceMenu = sc.nextInt();
 
 				switch (choiceMenu) {
@@ -63,13 +39,13 @@ public class Program {
 					int sellerMenu;
 					// Escolher entre as opções de Seller Crud
 					do {
-						showSellerCrudOption();
+						ShowMessage.showSellerCrudOption();
 						sellerMenu = sc.nextInt();
 						sc.nextLine();
 
 						switch (sellerMenu) {
 
-							// Create Seller
+						// Create Seller
 						case 1:
 							registerSeller(sdf, sellerDao, sc);
 							break;
@@ -79,17 +55,17 @@ public class Program {
 							findSeller(sellerDao, sc);
 							break;
 
-							// Update Seller
+						// Update Seller
 						case 3:
 							updateSeller(sdf, sellerDao, sc);
 							break;
 
-							// Delete Seller
+						// Delete Seller
 						case 4:
 							deleteSeller(sellerDao, sc);
 							break;
 
-							// List all Seller's
+						// List all Seller's
 						case 5:
 							listAllSellers(sellerDao);
 							break;
@@ -105,7 +81,7 @@ public class Program {
 				case 2:
 					int departmentMenu;
 					do {
-						showDepartmentCrudOption();
+						ShowMessage.showDepartmentCrudOption();
 						departmentMenu = sc.nextInt();
 						sc.nextLine();
 						switch (departmentMenu) {
@@ -119,7 +95,7 @@ public class Program {
 							break;
 
 						case 3:
-							uddateDepartment(departmentDao, sc);
+							updateDepartment(departmentDao, sc);
 							break;
 
 						case 4:
@@ -150,7 +126,7 @@ public class Program {
 		list.forEach(System.out::println);
 	}
 
-	private static void uddateDepartment(DepartmentDao departmentDao, Scanner sc) {
+	private static void updateDepartment(DepartmentDao departmentDao, Scanner sc) {
 		System.out.print("Enter deparment id to update: ");
 		int id = sc.nextInt();
 		sc.nextLine();
