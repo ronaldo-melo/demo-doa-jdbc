@@ -1,13 +1,11 @@
 package application;
 
 import java.text.ParseException;
-import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
-import model.entities.Department;
 import model.entities.SQLStrategy.SellerPersistence;
-import model.entities.enums.TipoSeller;
+import model.entities.enums.TypeSeller;
 import services.DepartmentService;
 import services.SellerService;
 
@@ -35,9 +33,9 @@ public class Program {
 					do {
 						ShowMessage.showSellerCrudOption();
 						sellerMenu = sc.nextInt();
-						if(sellerMenu <= TipoSeller.values().length) {							
-							sc.nextLine();
-							TipoSeller tsp = TipoSeller.values()[sellerMenu - 1];
+						sc.nextLine();
+						if(sellerMenu <= TypeSeller.values().length) {														
+							TypeSeller tsp = TypeSeller.values()[sellerMenu - 1];
 							SellerPersistence sp = tsp.getSellerPesistence();
 							sp.persistence(sc, sellerService);
 						}
@@ -54,12 +52,6 @@ public class Program {
 						sc.nextLine();
 						
 						
-						
-						if (departmentMenu == 4) {
-							System.out.println("\n-----------------ALL DEPARTMENTS-------------------");
-							List<Department> list = departmentService.findAll();
-							list.forEach(System.out::println);
-						}
 
 					} while (departmentMenu >= 1 && departmentMenu <= 4);
 					break;

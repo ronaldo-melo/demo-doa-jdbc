@@ -7,7 +7,7 @@ import model.entities.SQLStrategy.Implementation.FindAllSellers;
 import model.entities.SQLStrategy.Implementation.FindByIdSeller;
 import model.entities.SQLStrategy.Implementation.SellerInsert;
 
-public enum TipoSeller {
+public enum TypeSeller {
 	
 	CREATE_SELLER { 
 		@Override
