@@ -1,6 +1,8 @@
 package model.entities.enums;
 
 import model.entities.SQLStrategy.DepartmentPersistence;
+import model.entities.SQLStrategy.Implementation.department.DepartmentFindById;
+import model.entities.SQLStrategy.Implementation.department.DepartmentUpdate;
 import model.entities.SQLStrategy.Implementation.department.InsertDepartment;
 
 public enum TypeDepartment {
@@ -15,16 +17,14 @@ public enum TypeDepartment {
 	FIND_DEPARTMENT {
 		@Override
 		public DepartmentPersistence getDepartmentPersistence() {
-			// TODO Auto-generated method stub
-			return null;
+			return new DepartmentFindById();
 		}
 	},
 	
 	UPDATE_DEPARTMENT{
 		@Override
-		public DepartmentPersistence getDepartmentPersistence() {
-			// TODO Auto-generated method stub
-			return null;
+		public DepartmentPersistence getDepartmentPersistence() {			
+			return new DepartmentUpdate();
 		}
 	},	
 	
