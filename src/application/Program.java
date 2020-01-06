@@ -35,10 +35,12 @@ public class Program {
 					do {
 						ShowMessage.showSellerCrudOption();
 						sellerMenu = sc.nextInt();
-						sc.nextLine();
-						TipoSeller tsp = TipoSeller.values()[sellerMenu - 1];
-						SellerPersistence sp = tsp.getSellerPesistence();
-						sp.persistence(sc, sellerService);
+						if(sellerMenu <= TipoSeller.values().length) {							
+							sc.nextLine();
+							TipoSeller tsp = TipoSeller.values()[sellerMenu - 1];
+							SellerPersistence sp = tsp.getSellerPesistence();
+							sp.persistence(sc, sellerService);
+						}
 
 					} while (sellerMenu >= 1 && sellerMenu <= 5);
 					System.out.println("\nLiving Seller C.R.U.D\n");
