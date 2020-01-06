@@ -2,22 +2,23 @@ package model.entities.enums;
 
 import model.entities.SQLStrategy.SellerPersistence;
 import model.entities.SQLStrategy.Implementation.UpdateSeller;
-import model.entities.SQLStrategy.Implementation.FindSellerById;
-import model.entities.SQLStrategy.Implementation.InsertSeller;
+import model.entities.SQLStrategy.Implementation.DeleteSeller;
+import model.entities.SQLStrategy.Implementation.FindByIdSeller;
+import model.entities.SQLStrategy.Implementation.SellerInsert;
 
 public enum TipoSeller {
 	
 	CREATE_SELLER { 
 		@Override
 		public SellerPersistence getSellerPesistence() {
-			return new InsertSeller();
+			return new SellerInsert();
 		}
 	},
 	
 	FIND_SELLER {
 		@Override
 		public SellerPersistence getSellerPesistence() {
-			return new FindSellerById();
+			return new FindByIdSeller();
 		}
 	},
 	
@@ -31,8 +32,7 @@ public enum TipoSeller {
 	DELETE_SELLER {
 		@Override
 		public SellerPersistence getSellerPesistence() {
-			// TODO Auto-generated method stub
-			return null;
+			return new DeleteSeller();
 		}
 	};
 	

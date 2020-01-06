@@ -11,7 +11,7 @@ import model.entities.Seller;
 import model.entities.SQLStrategy.SellerPersistence;
 import services.SellerService;
 
-public class InsertSeller implements SellerPersistence {
+public class SellerInsert implements SellerPersistence {
 
 	@Override
 	public void persistence(Scanner sc, SellerService sellerService) {
