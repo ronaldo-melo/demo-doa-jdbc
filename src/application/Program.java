@@ -1,13 +1,11 @@
 package application;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
 import model.entities.Department;
-import model.entities.Seller;
 import model.entities.SQLStrategy.SellerPersistence;
 import model.entities.enums.TipoSeller;
 import services.DepartmentService;
@@ -38,16 +36,9 @@ public class Program {
 						ShowMessage.showSellerCrudOption();
 						sellerMenu = sc.nextInt();
 						sc.nextLine();
-
 						TipoSeller tsp = TipoSeller.values()[sellerMenu - 1];
 						SellerPersistence sp = tsp.getSellerPesistence();
 						sp.persistence(sc, sellerService);
-
-						if (sellerMenu == 5) {
-							System.out.println("\n-----------------ALL SELLERS-------------------");
-							List<Seller> list = sellerService.findAll();
-							list.stream().forEach(System.out::println);
-						}
 
 					} while (sellerMenu >= 1 && sellerMenu <= 5);
 					System.out.println("\nLiving Seller C.R.U.D\n");
