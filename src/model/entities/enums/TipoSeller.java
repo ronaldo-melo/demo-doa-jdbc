@@ -1,6 +1,7 @@
 package model.entities.enums;
 
 import model.entities.SQLStrategy.SellerPersistence;
+import model.entities.SQLStrategy.Implementation.UpdateSeller;
 import model.entities.SQLStrategy.Implementation.FindSellerById;
 import model.entities.SQLStrategy.Implementation.InsertSeller;
 
@@ -23,8 +24,7 @@ public enum TipoSeller {
 	UPDATE_SELLER{
 		@Override
 		public SellerPersistence getSellerPesistence() {
-			// TODO Auto-generated method stub
-			return null;
+			return new UpdateSeller();
 		}
 	},
 	
