@@ -2,13 +2,14 @@ package application;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
 import model.entities.Department;
 import model.entities.Seller;
+import model.entities.SQLStrategy.SellerPersistence;
+import model.entities.enums.TipoSeller;
 import services.DepartmentService;
 import services.SellerService;
 
@@ -23,6 +24,7 @@ public class Program {
 		Seller seller = null;
 		Department department = null;
 		int id;
+		SellerPersistence sellerPersistence;
 		
 		try (Scanner sc = new Scanner(System.in)) {
 
@@ -45,22 +47,11 @@ public class Program {
 						switch (sellerMenu) {
 
 						// Create Seller
-						case 1:							
-							System.out.print("Enter Seller name: ");
-							String name = sc.nextLine();
-							System.out.print("Enter Seller email: ");
-							String email = sc.nextLine();
-							System.out.print("Enter Seller BirthDate: ");
-							Date birthDate = sdf.parse(sc.nextLine());
-							System.out.print("Enter Seller base salary: ");
-							double baseSalary = sc.nextDouble();
-							System.out.print("Enter Seller DepartmentId: ");
-							id = sc.nextInt();
-							
-							System.out.println();
-							
-							seller = new Seller(id, name, email, birthDate, baseSalary, new Department(id, null));														
-							sellerService.insert(seller);
+						case 1:								
+							TipoSeller tsp = TipoSeller.values()[sellerMenu - 1];
+							SellerPersistence sp = tsp.getSellerPesistence();							
+							sp.persistence(sc, sellerService);							
+															
 							break;
 							
 							// Find Seller	
