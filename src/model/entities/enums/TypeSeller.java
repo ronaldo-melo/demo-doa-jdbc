@@ -1,11 +1,11 @@
 package model.entities.enums;
 
 import model.entities.SQLStrategy.SellerPersistence;
-import model.entities.SQLStrategy.Implementation.UpdateSeller;
-import model.entities.SQLStrategy.Implementation.DeleteSeller;
-import model.entities.SQLStrategy.Implementation.FindAllSellers;
-import model.entities.SQLStrategy.Implementation.FindByIdSeller;
-import model.entities.SQLStrategy.Implementation.SellerInsert;
+import model.entities.SQLStrategy.Implementation.seller.DeleteSeller;
+import model.entities.SQLStrategy.Implementation.seller.FindAllSellers;
+import model.entities.SQLStrategy.Implementation.seller.FindByIdSeller;
+import model.entities.SQLStrategy.Implementation.seller.SellerInsert;
+import model.entities.SQLStrategy.Implementation.seller.UpdateSeller;
 
 public enum TypeSeller {
 	

@@ -1,4 +1,4 @@
-package model.entities.SQLStrategy.Implementation;
+package model.entities.SQLStrategy.Implementation.seller;
 
 import java.util.Scanner;
 

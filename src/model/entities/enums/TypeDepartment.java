@@ -1,14 +1,14 @@
 package model.entities.enums;
 
 import model.entities.SQLStrategy.DepartmentPersistence;
+import model.entities.SQLStrategy.Implementation.department.InsertDepartment;
 
 public enum TypeDepartment {
 	
 	CREATE_DEPARTMENT {
 		@Override
 		public DepartmentPersistence getDepartmentPersistence() {
-			// TODO Auto-generated method stub
-			return null;
+			return new InsertDepartment();
 		}
 	},
 	

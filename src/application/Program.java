@@ -4,7 +4,9 @@ import java.text.ParseException;
 import java.util.Locale;
 import java.util.Scanner;
 
+import model.entities.SQLStrategy.DepartmentPersistence;
 import model.entities.SQLStrategy.SellerPersistence;
+import model.entities.enums.TypeDepartment;
 import model.entities.enums.TypeSeller;
 import services.DepartmentService;
 import services.SellerService;
@@ -51,7 +53,12 @@ public class Program {
 						departmentMenu = sc.nextInt();
 						sc.nextLine();
 						
-						
+						if(departmentMenu <= TypeDepartment.values().length) {														
+							TypeDepartment td = TypeDepartment.values()[departmentMenu - 1];
+							DepartmentPersistence sp = td.getDepartmentPersistence();
+							sp.persistence(sc, departmentService);
+						}
+
 
 					} while (departmentMenu >= 1 && departmentMenu <= 4);
 					break;
