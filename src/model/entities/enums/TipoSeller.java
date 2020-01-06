@@ -1,6 +1,7 @@
 package model.entities.enums;
 
 import model.entities.SQLStrategy.SellerPersistence;
+import model.entities.SQLStrategy.Implementation.FindSellerById;
 import model.entities.SQLStrategy.Implementation.InsertSeller;
 
 public enum TipoSeller {
@@ -15,8 +16,7 @@ public enum TipoSeller {
 	FIND_SELLER {
 		@Override
 		public SellerPersistence getSellerPesistence() {
-			// TODO Auto-generated method stub
-			return null;
+			return new FindSellerById();
 		}
 	},
 	
